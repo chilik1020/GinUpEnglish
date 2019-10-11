@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@android:color/transparent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/llMain"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:orientation="vertical">
+
+        <com.dd.ShadowLayout style="@style/navBtnShadow">
+
+            <Button
+                android:id="@+id/mainCardGrammar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/nav_main_grammar_btn_design" />
+
+        </com.dd.ShadowLayout>
+
+        <com.dd.ShadowLayout style="@style/navBtnShadow">
+
+            <Button
+                android:id="@+id/mainCardTests"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/nav_main_tests_btn_design" />
+
+        </com.dd.ShadowLayout>
+
+        <com.dd.ShadowLayout style="@style/navBtnShadow">
+
+            <Button
+                android:id="@+id/mainCardScore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/nav_main_score_btn_design" />
+
+        </com.dd.ShadowLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llNavSmallBtns"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:orientation="horizontal">
+
+        <!--RATE SMALL BTN-->
+        <com.dd.ShadowLayout style="@style/navSmallBtnShadow">
+
+            <Button
+                android:id="@+id/navRate"
+                style="@style/navSmallBtn"
+                android:background="@drawable/nav_small_rate_design" />
+        </com.dd.ShadowLayout>
+
+        <!--UPGRADE SMALL BTN-->
+        <com.dd.ShadowLayout style="@style/navSmallBtnShadow">
+
+            <Button
+                android:id="@+id/navUpgrade"
+                style="@style/navSmallBtn"
+                android:background="@drawable/nav_small_upgrade_design" />
+        </com.dd.ShadowLayout>
+
+        <!--&lt;!&ndash;THANKS SMALL BTN&ndash;&gt;-->
+        <!--<com.dd.ShadowLayout-->
+        <!--style="@style/navBtnShadow">-->
+        <!--<Button-->
+        <!--android:id="@+id/navThanks"-->
+        <!--style="@style/navSmallBtn"-->
+        <!--android:background="@drawable/nav_small_thanks_design" />-->
+        <!--</com.dd.ShadowLayout>-->
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

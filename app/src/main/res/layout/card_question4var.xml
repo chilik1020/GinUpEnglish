@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/llQuestItem"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/test_4var_item_bg"
+    android:layout_marginBottom="@dimen/md_keylines"
+    android:layout_marginRight="@dimen/md_keylines"
+    android:layout_marginLeft="@dimen/md_keylines"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_margin="@dimen/md_keylines"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvQuest"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/monserrat_regular"
+            android:text="Here will be text of question"
+            android:textColor="@color/color_1"
+
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <RadioGroup
+            android:id="@+id/rgVariants"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/rbVar0"
+                style="@style/radioBtn"/>
+
+            <RadioButton
+                android:id="@+id/rbVar1"
+                style="@style/radioBtn"/>
+
+            <RadioButton
+                android:id="@+id/rbVar2"
+                style="@style/radioBtn"/>
+
+            <RadioButton
+                android:id="@+id/rbVar3"
+                style="@style/radioBtn"/>
+
+        </RadioGroup>
+
+    </LinearLayout>
+
+</LinearLayout>

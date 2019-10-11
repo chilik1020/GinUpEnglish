@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.fragments.testsfragments.TestsMainFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.dd.ShadowLayout
+            android:id="@+id/test10Q"
+            style="@style/RvCardShadowStyle">
+
+            <LinearLayout
+                android:background="@drawable/custom_ripple"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/tvTest10q"
+                    style="@style/CardTextStyle"
+                    android:textColor="@color/color_3"
+                    tools:text="@string/random10test" />
+            </LinearLayout>
+        </com.dd.ShadowLayout>
+
+        <com.dd.ShadowLayout
+            android:id="@+id/test20Q"
+            style="@style/RvCardShadowStyle">
+
+            <LinearLayout
+                android:background="@drawable/custom_ripple"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/tvTest20q"
+                    style="@style/CardTextStyle"
+                    android:textColor="@color/color_3"
+                    tools:text="@string/random20test" />
+            </LinearLayout>
+        </com.dd.ShadowLayout>
+
+        <com.dd.ShadowLayout
+            android:id="@+id/testChQ"
+            style="@style/RvCardShadowStyle">
+
+            <LinearLayout
+                android:background="@drawable/custom_ripple"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/tvTestChQ"
+                    style="@style/CardTextStyle"
+                    android:textColor="@color/color_3"
+                    tools:text="@string/chapters" />
+            </LinearLayout>
+        </com.dd.ShadowLayout>
+
+        <com.dd.ShadowLayout
+            android:id="@+id/testTopQ"
+            style="@style/RvCardShadowStyle">
+
+            <LinearLayout
+                android:background="@drawable/custom_ripple"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/tvTestTopQ"
+                    style="@style/CardTextStyle"
+                    android:textColor="@color/color_3"
+                    tools:text="@string/lessons" />
+            </LinearLayout>
+        </com.dd.ShadowLayout>
+
+        <com.dd.ShadowLayout
+            android:visibility="invisible"
+            android:id="@+id/testDbGetQ"
+            style="@style/RvCardShadowStyle">
+
+            <LinearLayout
+                android:background="@drawable/custom_ripple"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/tvTestDb"
+                    style="@style/CardTextStyle"
+                    android:textColor="@color/color_5"
+                    tools:text="@string/run_tests" />
+            </LinearLayout>
+        </com.dd.ShadowLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llNavSmallBtns"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <!--GRAMMAR SMALL BTN-->
+        <com.dd.ShadowLayout
+            style="@style/navSmallBtnShadow">
+            <Button
+                android:id="@+id/navGrammar"
+                style="@style/navSmallBtn"
+                android:background="@drawable/nav_small_grammar_design" />
+        </com.dd.ShadowLayout>
+
+        <!--SCORE SMALL BTN-->
+        <com.dd.ShadowLayout
+            style="@style/navSmallBtnShadow">
+            <Button
+                android:id="@+id/navScore"
+                style="@style/navSmallBtn"
+                android:background="@drawable/nav_small_score_design" />
+        </com.dd.ShadowLayout>
+
+        <!--UPGRADE SMALL BTN-->
+        <com.dd.ShadowLayout
+            style="@style/navSmallBtnShadow">
+            <Button
+                android:id="@+id/navUpgrade"
+                style="@style/navSmallBtn"
+                android:background="@drawable/nav_small_upgrade_design" />
+        </com.dd.ShadowLayout>
+
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

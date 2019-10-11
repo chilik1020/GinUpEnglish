@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.dd.ShadowLayout
+    style="@style/RvCardShadowStyle"
+    android:id="@+id/rv_card"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:background="@drawable/custom_ripple"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            style="@style/CardTextStyle"
+            android:textColor="@color/color_3"
+            android:id="@+id/tvCardTopic"
+            tools:text="Chapter 1" />
+    </LinearLayout>
+
+    </com.dd.ShadowLayout>
+

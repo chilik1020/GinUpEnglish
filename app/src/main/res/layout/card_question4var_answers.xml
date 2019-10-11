@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/llAnswerItem"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/test_4var_item_bg"
+    android:layout_marginBottom="@dimen/md_keylines"
+    android:layout_marginRight="@dimen/md_keylines"
+    android:layout_marginLeft="@dimen/md_keylines"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_margin="@dimen/md_keylines"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvQuestionAnswersFrag"
+            android:textColor="@color/color_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/monserrat_regular"
+            android:text="Here will be text of question"
+            android:textStyle="bold"
+            android:textSize="18sp" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/tvVar0AnswersFrag"
+                        style="@style/textVarStyle"/>
+
+                    <TextView
+                        android:id="@+id/tvVar1AnswersFrag"
+                        style="@style/textVarStyle"/>
+
+                    <TextView
+                        android:id="@+id/tvVar2AnswersFrag"
+                        style="@style/textVarStyle"/>
+
+                    <TextView
+                        android:id="@+id/tvVar3AnswersFrag"
+                        style="@style/textVarStyle"/>
+
+            </LinearLayout>
+
+
+    </LinearLayout>
+</LinearLayout>

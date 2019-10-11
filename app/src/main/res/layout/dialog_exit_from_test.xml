@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/card_score_group_bg"
+    android:elevation="5dp"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <TextView
+        android:text="@string/dialog_are_you_sure"
+        android:textSize="30sp"
+        style="@style/ResultTestTExtStyle" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/md_keylines"
+        android:src="@drawable/exit" />
+
+    <LinearLayout
+        android:gravity="end"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            style="@style/AlertDialogButtonsStyle"
+            android:id="@+id/btnExitFromTestCancel"
+            android:text="@string/dialog_no" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_height="match_parent"
+            android:background="@color/color_1_1"/>
+
+        <TextView
+            style="@style/AlertDialogButtonsStyle"
+            android:id="@+id/btnExitFromTestConfirm"
+            android:text="@string/dialog_yes"/>
+
+        <Space
+            android:layout_width="@dimen/md_keylines"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+</LinearLayout>

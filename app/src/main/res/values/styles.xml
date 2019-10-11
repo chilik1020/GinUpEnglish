@@ -1,0 +1,134 @@
+<resources>
+
+    <style name="AppTheme" parent="AppTheme.Base"/>
+    
+    <!-- Base application theme. -->
+    <style name="AppTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+    </style>
+
+    <style name="AppTheme.Launcher">
+        <item name="android:windowBackground">@drawable/splashbackground</item>
+    </style>
+
+    <style name="ResultTestTExtStyle" parent="android:Widget.TextView">
+        <item name="android:fontFamily">@font/bank_gothic_light_bt</item>
+        <item name="android:textSize">30sp</item>
+        <item name="android:textColor">@color/color_3</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_margin">@dimen/md_keylines</item>
+    </style>
+
+    <style name="AlertDialogButtonsStyle">
+        <item name="android:fontFamily">@font/bank_gothic_light_bt</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/color_1</item>
+        <item name="android:layout_margin">@dimen/md_keylines</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+    </style>
+
+
+    <style name="CardTextStyle" parent="android:Widget.TextView">
+        <item name="android:fontFamily">@font/bank_gothic_light_bt</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:textColor">@color/card_text</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_marginBottom">@dimen/md_keylines</item>
+        <item name="android:layout_marginLeft">@dimen/md_keylines</item>
+        <item name="android:layout_marginRight">@dimen/md_keylines</item>
+        <item name="android:layout_marginTop">@dimen/md_keylines</item>
+    </style>
+
+    <!-- SCORE CARDS TEXT STYLE-->
+    <style name="CardScoreTextStyle" parent="CardView.Light">
+        <item name="android:fontFamily">@font/bank_gothic_light_bt</item>
+        <item name="android:textColor">@color/card_text</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+    </style>
+
+    <style name="CardGroupScoreTextStyle" parent="CardScoreTextStyle">
+        <item name="android:textColor">@color/card_text</item>
+    </style>
+
+    <style name="CardChildTextStyle" parent="CardScoreTextStyle">
+        <item name="android:textColor">@color/card_child_text</item>
+    </style>
+
+    <!-- PurchaseActivity text style-->
+    <style name="TextStylePurchaseActivity">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:fontFamily">@font/bank_gothic_light_bt</item>
+        <item name="android:textColor">@color/color_1</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <!-- STYLE OF NAVIGATION BUTTON-->
+    <style name="navSmallBtn" parent="Base.Widget.AppCompat.Button">
+        <item name="android:onClick">navOnClick</item>
+        <item name="android:layout_width">55dp</item>
+        <item name="android:layout_height">45dp</item>
+    </style>
+
+    <style name="navSmallBtnShadow">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="sl_cornerRadius">7dp</item>
+        <item name="sl_dx">3dp</item>
+        <item name="sl_dy">3dp</item>
+        <item name="sl_shadowColor">#5A000000</item>
+        <item name="sl_shadowRadius">4dp</item>
+    </style>
+
+    <style name="navBtnShadow" parent="navSmallBtnShadow">
+        <item name="android:layout_marginTop">@dimen/md_keylines</item>
+    </style>
+
+    <style name="RvCardShadowStyle">
+        <item name="android:layout_marginRight">@dimen/md_keylines</item>
+        <item name="android:layout_marginLeft">@dimen/md_keylines</item>
+        <item name="android:layout_marginTop">@dimen/md_keylines</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:elevation">4dp</item>
+        <item name="android:padding">10dp</item>
+        <item name="sl_cornerRadius">7dp</item>
+        <item name="sl_dx">3dp</item>
+        <item name="sl_dy">3dp</item>
+        <item name="sl_shadowColor">#5A000000</item>
+        <item name="sl_shadowRadius">4dp</item>
+    </style>
+
+    <!-- STYLE OF RADIOBUTTON-->
+    <style name="radioBtn" parent="Widget.AppCompat.CompoundButton.RadioButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:focusable">false</item>
+        <item name="android:focusableInTouchMode">false</item>
+        <item name="android:buttonTint">@color/color_1</item>
+        <item name="android:fontFamily">@font/monserrat_regular</item>
+    </style>
+
+    <style name="textVarStyle" parent="android:Widget.TextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">@dimen/md_keylines</item>
+        <item name="android:fontFamily">@font/monserrat_regular</item>
+    </style>
+
+</resources>

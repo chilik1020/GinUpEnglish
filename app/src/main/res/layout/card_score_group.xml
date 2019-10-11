@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/card_score_group"
+    android:layout_marginTop="@dimen/md_keylines"
+    android:background="@drawable/card_score_group_bg"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent">
+
+        <LinearLayout
+
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:gravity="center"
+                android:id="@+id/tvGroupScoreCardTopic"
+                style="@style/CardGroupScoreTextStyle"
+                tools:text="Random questions"
+                android:textSize="22sp"/>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:gravity="center"-->
+                    <!--style="@style/CardGroupScoreTextStyle"-->
+                    <!--android:textSize="16sp"-->
+                    <!--android:text="attempts: "/>-->
+                <!--<TextView-->
+                    <!--android:id="@+id/tvGroupScoreCardAttempts"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:gravity="center"-->
+                    <!--style="@style/CardGroupScoreTextStyle"-->
+                    <!--android:textSize="16sp"-->
+                    <!--android:text="24"/>-->
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginLeft="18dp"
+                    style="@style/CardGroupScoreTextStyle"
+                    android:textSize="16sp"
+                    android:text="average: "/>
+                <TextView
+                    android:id="@+id/tvGroupScoreCardAverage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    style="@style/CardGroupScoreTextStyle"
+                    android:textSize="16sp"
+                    android:text="70%"/>
+            </LinearLayout>
+
+            <RelativeLayout
+
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/ivGroupScoreCardStars"
+                    android:layout_width="117dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/stars_0" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+

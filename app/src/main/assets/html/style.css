@@ -1,0 +1,52 @@
+@font-face {
+    font-family: monserrat;
+    src: url("file:///android_asset/fonts/monserrat_regular.ttf");
+}
+  body {
+  text-align: left;
+  font-family: monserrat;
+  background: rgba(255,255,255,0);
+  white-space: nowrap;
+}
+h1, h2, p {
+  display: inline-block;
+
+}
+h1 {
+  font-size: 16px
+}
+h2 {
+  font-size: 14px;
+}
+p {
+  font-size: 14px;
+  margin-top: 1px;
+  margin-bottom: 1px;
+}
+table {
+  border-collapse: collapse;
+}
+tr {
+    text-align: center;
+}
+th {
+  text-align: center;
+}
+td {
+  text-align: center;
+}
+th, td {
+  padding: 1px;
+}
+.turquoise {
+  background: #00ADB5;
+}
+.yellow {
+  background: #F8B500;
+}
+.red {
+  background: #FC3C3C;
+}
+.example {
+  margin-left: 10px;
+}

@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">GinUp English</string>
+
+    <!-- Tests fragment strings-->
+    <string name="random10test">Test: 10 random questions</string>
+    <string name="random20test">Test: 20 random questions</string>
+    <string name="random_questions">Random questions</string>
+    <string name="chapters">Chapters</string>
+    <string name="lessons">Lessons</string>
+
+    <string name="run_tests">Run tests</string>
+
+    <string name="result_0">Repeat grammar!</string>
+    <string name="result_1">Repeat grammar!</string>
+    <string name="result_2">Not very bad!</string>
+    <string name="result_3">Good job!</string>
+    <string name="result_4">Great!</string>
+    <string name="result_5">Excellent!</string>
+
+    <!-- Alert dialog text -->
+    <string name="dialog_rate_text">Could you rate GinUp English app?</string>
+    <string name="dialog_later">Later</string>
+    <string name="dialog_rate">Rate</string>
+    <string name="dialog_already_rate">Already</string>
+    <string name="dialog_show_results">Show results</string>
+    <string name="dialog_exit">Exit</string>
+    <string name="dialog_yes">Yes</string>
+    <string name="dialog_no">Cancel</string>
+    <string name="dialog_are_you_sure">Are you sure?</string>
+    <string name="dialog_reset_score">All score will be deleted!</string>
+
+    <!--Purchase activity-->
+    <string name="full_app">Full app</string>
+    <string name="unlock_all_questions">unlock all 1250 questions</string>
+    <string name="unlock_all_new_questions">unlock all new questions</string>
+    <string name="app_price">for 1,49$</string>
+    <string name="image_description_buy_full_app">Buy Full App</string>
+
+</resources>

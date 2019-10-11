@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.MainActivity">
+
+    <TextView
+        android:id="@+id/tvTopic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:gravity="center"
+
+        android:text="Topic"
+        android:textColor="@color/color_1"
+        android:fontFamily="@font/bank_gothic_light_bt"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/llGrammar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/llGrammar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/unit_layout_bg"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/llNavSmallBtns"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTopic">
+
+
+        <WebView
+            android:id="@+id/wvGrammar"
+            android:layout_margin="@dimen/md_keylines"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llNavSmallBtns"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/llGrammar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <!--GRAMMAR SMALL BTN-->
+        <com.dd.ShadowLayout
+            style="@style/navSmallBtnShadow">
+            <Button
+                android:id="@+id/navGrammar"
+                style="@style/navSmallBtn"
+                android:background="@drawable/nav_small_grammar_design" />
+        </com.dd.ShadowLayout>
+
+        <!--TESTS SMALL BTN-->
+        <com.dd.ShadowLayout
+            style="@style/navSmallBtnShadow">
+            <Button
+                android:id="@+id/navTests"
+                style="@style/navSmallBtn"
+                android:background="@drawable/nav_small_tests_design" />
+        </com.dd.ShadowLayout>
+
+        <!--UPGRADE SMALL BTN-->
+        <com.dd.ShadowLayout
+            style="@style/navSmallBtnShadow">
+            <Button
+                android:id="@+id/navUpgrade"
+                style="@style/navSmallBtn"
+                android:background="@drawable/nav_small_upgrade_design" />
+        </com.dd.ShadowLayout>
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

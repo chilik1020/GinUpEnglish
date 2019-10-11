@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.dd.ShadowLayout
+    style="@style/RvCardShadowStyle"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:background="@drawable/custom_ripple"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    style="@style/CardTextStyle"
+                    android:textColor="@color/color_3"
+                    android:id="@+id/tvCardTopic"
+                    tools:text="Topic Card" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/navUpgrade"
+                android:onClick="navOnClick"
+                android:visibility="invisible"
+                android:src="@drawable/btn_upgrade_small_design"
+                android:layout_gravity="center_vertical|start"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+
+            <ImageView
+                android:id="@+id/startsRateVertical"
+                android:src="@drawable/star_0_vert"
+                android:layout_gravity="center_vertical|end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </FrameLayout>
+
+    </com.dd.ShadowLayout>

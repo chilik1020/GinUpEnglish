@@ -1,0 +1,16 @@
+*.iml
+*.db
+*.html
+*.apk
+*.aab
+.gradle
+/local.properties
+/.idea/libraries
+/.idea
+/.idea/modules.xml
+/.idea/workspace.xml
+/app/schemas
+.DS_Store
+/build
+/captures
+.externalNativeBuild

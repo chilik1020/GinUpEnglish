@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@android:color/transparent"
+    android:layout_gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/my_recycler_view_chapters_tests_frag"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:clickable="true"
+        android:clipToPadding="false"
+        android:focusable="true"
+        android:scrollbars="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/llNavSmallBtns"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <LinearLayout
+        android:id="@+id/llNavSmallBtns"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/my_recycler_view_chapters_tests_frag">
+
+        <!--TESTS SMALL BTN-->
+        <com.dd.ShadowLayout
+            style="@style/navSmallBtnShadow">
+            <Button
+                android:id="@+id/navTests"
+                style="@style/navSmallBtn"
+                android:background="@drawable/nav_small_tests_design" />
+        </com.dd.ShadowLayout>
+
+        <!--SCORE SMALL BTN-->
+        <com.dd.ShadowLayout
+            style="@style/navSmallBtnShadow">
+            <Button
+                android:id="@+id/navScore"
+                style="@style/navSmallBtn"
+                android:background="@drawable/nav_small_score_design" />
+        </com.dd.ShadowLayout>
+        <!--UPGRADE SMALL BTN-->
+        <com.dd.ShadowLayout
+            style="@style/navSmallBtnShadow">
+            <Button
+                android:id="@+id/navUpgrade"
+                style="@style/navSmallBtn"
+                android:background="@drawable/nav_small_upgrade_design" />
+        </com.dd.ShadowLayout>
+
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

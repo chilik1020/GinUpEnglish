@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">@color/material_blue_grey_800</color>
+    <color name="colorPrimaryDark">@color/material_blue_grey_900</color>
+
+
+    <color name="white">#FFFFFF</color>
+
+    <color name="card_text">#D6D5D0</color>
+    <color name="card_child_text">#393e46</color>
+    <color name="card_score_group_bg">#393e46</color>
+    <color name="card_score_child_bg">#7ffff4e0</color>
+
+
+    <!-- ADOBE COLORS "Copy of Coke" -->
+    <color name="color_1">#393e46</color>
+    <color name="color_1_1">#10393e46</color>
+    <color name="color_1_2">#00393e46</color>
+    <color name="color_2">#00adb5</color>
+    <color name="color_2_1">#7000adb5</color>
+    <color name="color_3">#fff4e0</color>
+    <color name="color_5">#fc3c3c</color>
+    <color name="color_5_D0">#D0fc3c3c</color>
+    <color name="color_5_40">#40fc3c3c</color>
+    <!--                             -->
+</resources>
