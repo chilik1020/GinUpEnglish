@@ -203,7 +203,7 @@ public class Test4VarFragment extends Fragment implements View.OnClickListener {
         AlertDialog ad = adb.create();
         ad.show();
 
-        TextView btnShowResultConfirm = dialogResult.findViewById(R.id.btnShowResultConfirm);
+        Button btnShowResultConfirm = dialogResult.findViewById(R.id.btnShowResultConfirm);
         btnShowResultConfirm.setOnClickListener(view -> {
             ad.cancel();
             Test4VarAnswersFragment fragment = new Test4VarAnswersFragment();
@@ -221,7 +221,7 @@ public class Test4VarFragment extends Fragment implements View.OnClickListener {
                     .addToBackStack(null)
                     .commit();
         });
-        TextView btnExitFromTestCancel = dialogResult.findViewById(R.id.btnExitFromResult);
+        Button btnExitFromTestCancel = dialogResult.findViewById(R.id.btnExitFromResult);
         btnExitFromTestCancel.setOnClickListener(view -> {
             ad.cancel();
             Objects.requireNonNull(getActivity()).getSupportFragmentManager().popBackStackImmediate();

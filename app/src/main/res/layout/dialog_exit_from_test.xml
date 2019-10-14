@@ -24,10 +24,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
-            style="@style/AlertDialogButtonsStyle"
+        <Button
             android:id="@+id/btnExitFromTestCancel"
-            android:text="@string/dialog_no" />
+            android:text="@string/dialog_no"
+            style="?android:attr/borderlessButtonStyle"
+            android:fontFamily="@font/bank_gothic_light_bt"
+            android:textSize="14sp"
+            android:textColor="@color/color_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_for_alert_dialog"
+            />
 
         <View
             android:layout_width="1dp"
@@ -35,15 +42,18 @@
             android:layout_marginBottom="10dp"
             android:layout_height="match_parent"
             android:background="@color/color_1_1"/>
-
-        <TextView
-            style="@style/AlertDialogButtonsStyle"
+        <Button
             android:id="@+id/btnExitFromTestConfirm"
-            android:text="@string/dialog_yes"/>
+            android:text="@string/dialog_yes"
+            style="?android:attr/borderlessButtonStyle"
+            android:fontFamily="@font/bank_gothic_light_bt"
+            android:textSize="14sp"
+            android:textColor="@color/color_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_for_alert_dialog"
+            />
 
-        <Space
-            android:layout_width="@dimen/md_keylines"
-            android:layout_height="wrap_content" />
     </LinearLayout>
 
 </LinearLayout>

@@ -26,12 +26,19 @@
     <LinearLayout
         android:gravity="end"
         android:background="@color/white"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
-            style="@style/AlertDialogButtonsStyle"
+        <Button
+            style="?android:attr/borderlessButtonStyle"
+            android:fontFamily="@font/bank_gothic_light_bt"
+            android:textSize="14sp"
+            android:textColor="@color/color_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:id="@+id/btnResetScoreCancel"
+            android:background="@drawable/btn_for_alert_dialog"
             android:text="@string/dialog_no" />
 
         <View
@@ -41,13 +48,16 @@
             android:layout_height="match_parent"
             android:background="@color/color_1_1"/>
 
-        <TextView
-            style="@style/AlertDialogButtonsStyle"
+        <Button
+            style="?android:attr/borderlessButtonStyle"
+            android:fontFamily="@font/bank_gothic_light_bt"
+            android:textSize="14sp"
+            android:textColor="@color/color_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:id="@+id/btnResetScoreConfirm"
-            android:text="@string/dialog_yes"/>
+            android:background="@drawable/btn_for_alert_dialog"
+            android:text="@string/dialog_yes" />
 
-        <Space
-            android:layout_width="@dimen/md_keylines"
-            android:layout_height="wrap_content" />
     </LinearLayout>
 </LinearLayout>

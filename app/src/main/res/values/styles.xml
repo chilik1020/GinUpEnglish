@@ -26,16 +26,6 @@
         <item name="android:layout_margin">@dimen/md_keylines</item>
     </style>
 
-    <style name="AlertDialogButtonsStyle">
-        <item name="android:fontFamily">@font/bank_gothic_light_bt</item>
-        <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@color/color_1</item>
-        <item name="android:layout_margin">@dimen/md_keylines</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_width">wrap_content</item>
-    </style>
-
-
     <style name="CardTextStyle" parent="android:Widget.TextView">
         <item name="android:fontFamily">@font/bank_gothic_light_bt</item>
         <item name="android:textSize">22sp</item>

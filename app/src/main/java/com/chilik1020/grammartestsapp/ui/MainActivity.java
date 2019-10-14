@@ -6,8 +6,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
-
+import android.widget.Button;
 
 import com.chilik1020.grammartestsapp.R;
 import com.chilik1020.grammartestsapp.data.App;
@@ -81,12 +80,12 @@ public class MainActivity extends AppCompatActivity{
         AlertDialog ad = adb.create();
         ad.show();
 
-        TextView btnExitFromTestConfirm = dialogResult.findViewById(R.id.btnExitFromTestConfirm);
+        Button btnExitFromTestConfirm = dialogResult.findViewById(R.id.btnExitFromTestConfirm);
         btnExitFromTestConfirm.setOnClickListener(view -> {
             MainActivity.super.onBackPressed();
             ad.cancel();
         });
-        TextView btnExitFromTestCancel = dialogResult.findViewById(R.id.btnExitFromTestCancel);
+        Button btnExitFromTestCancel = dialogResult.findViewById(R.id.btnExitFromTestCancel);
         btnExitFromTestCancel.setOnClickListener(view -> ad.cancel());
     }
 
@@ -110,7 +109,7 @@ public class MainActivity extends AppCompatActivity{
         AlertDialog ad = adb.create();
         ad.show();
 
-        TextView btnAlreadyRate = dialogResult.findViewById(R.id.btnAlreadyRate);
+        Button btnAlreadyRate = dialogResult.findViewById(R.id.btnAlreadyRate);
         btnAlreadyRate.setOnClickListener(view -> {
             ad.cancel();
             App.getInstance().getAppPersonalDataDatabase().UserStatDao()
@@ -119,12 +118,12 @@ public class MainActivity extends AppCompatActivity{
                     .subscribe();
         });
 
-        TextView btnRateLater = dialogResult.findViewById(R.id.btnRateLater);
+        Button btnRateLater = dialogResult.findViewById(R.id.btnRateLater);
         btnRateLater.setOnClickListener(view -> {
             ad.cancel();
         });
 
-        TextView btnRateNow = dialogResult.findViewById(R.id.btnRateNow);
+        Button btnRateNow = dialogResult.findViewById(R.id.btnRateNow);
         btnRateNow.setOnClickListener(view -> {
             ad.cancel();
             rateApp();
