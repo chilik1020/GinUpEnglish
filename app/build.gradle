@@ -14,15 +14,18 @@ android {
 
         javaCompileOptions {
             annotationProcessorOptions {
+                includeCompileClasspath true
                 arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
             }
         }
+
     }
     buildTypes {
         release {
+
             // Enables code shrinking, obfuscation, and optimization for only
             // your project's release build type.
-   //         minifyEnabled true
+            minifyEnabled false
 
             // Enables resource shrinking, which is performed by the
             // Android Gradle plugin.
@@ -37,8 +40,11 @@ android {
                     outputFileName = "${variant.applicationId}-${variant.versionName}.apk"
                 }
             }
+
+
         }
         debug {
+
         }
     }
 
@@ -66,12 +72,12 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta2'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta3'
 
-    implementation 'com.google.android.material:material:1.1.0-alpha10'
+    implementation 'com.google.android.material:material:1.2.0-alpha01'
 
     // Recycler View
-    implementation group: 'androidx.recyclerview', name: 'recyclerview', version: '1.1.0-beta04'
+    implementation group: 'androidx.recyclerview', name: 'recyclerview', version: '1.1.0-rc01'
 
     // Card View
     implementation group: 'androidx.cardview', name: 'cardview', version: '1.0.0'
@@ -79,20 +85,35 @@ dependencies {
     // Shadow layout
     implementation 'com.github.dmytrodanylyk.shadow-layout:library:1.0.3'
 
+
+    // Dagger 2
+    api 'com.google.dagger:dagger:2.17'
+    api 'com.google.dagger:dagger-android:2.17'
+    api 'com.google.dagger:dagger-android-support:2.17'
+    annotationProcessor 'com.google.dagger:dagger-android-processor:2.17'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.17'
+
+    // ButterKnife
+    implementation 'com.jakewharton:butterknife:10.2.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.0'
+
     // ROOM
-    def room_version = '2.2.0-rc01'
+    def room_version = '2.2.1'
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
 
 
     // RXJAVA
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
-    implementation 'io.reactivex.rxjava2:rxjava:2.2.9'
-    implementation group: 'androidx.room', name: 'room-rxjava2', version: '2.2.0-rc01'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.14'
+    implementation group: 'androidx.room', name: 'room-rxjava2', version: '2.2.1'
 
 
     // Android In-App Billing v3 Library
-    implementation 'com.anjlab.android.iab.v3:library:1.0.44'
+    implementation 'com.anjlab.android.iab.v3:library:1.1.0'
+
+    // Required for local unit tests (JUnit 4 framework)
+    testImplementation 'junit:junit:4.12'
 
 }
 repositories {

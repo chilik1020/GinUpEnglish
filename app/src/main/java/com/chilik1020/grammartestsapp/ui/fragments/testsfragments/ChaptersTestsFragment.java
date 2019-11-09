@@ -6,9 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.chilik1020.grammartestsapp.R;
-import com.chilik1020.grammartestsapp.data.App;
-import com.chilik1020.grammartestsapp.data.dao.ChapterDao;
-import com.chilik1020.grammartestsapp.data.db.AppGeneralDataDatabase;
+import com.chilik1020.grammartestsapp.model.entities.Chapter;
+import com.chilik1020.grammartestsapp.presenters.ChapterContract;
+import com.chilik1020.grammartestsapp.presenters.ChaptersPresenter;
 import com.chilik1020.grammartestsapp.ui.listeners.RecyclerViewClickListener;
 import com.chilik1020.grammartestsapp.ui.adapters.ChapterRecyclerViewAdapter;
 
@@ -18,36 +18,55 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
+import java.util.List;
 
+import javax.inject.Inject;
 
-public class ChaptersTestsFragment extends Fragment {
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import dagger.android.support.AndroidSupportInjection;
 
-    private final ChapterRecyclerViewAdapter adapter = new ChapterRecyclerViewAdapter();
+public class ChaptersTestsFragment extends Fragment implements ChapterContract.View {
+
+    @Inject
+    public ChaptersPresenter chaptersPresenter;
+
+    @BindView(R.id.my_recycler_view_chapters_frag) RecyclerView mRV;
+
+    private ChapterRecyclerViewAdapter adapter = new ChapterRecyclerViewAdapter();
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-
         View rootView = inflater.inflate(R.layout.fragment_chapters_list, container, false);
+        ButterKnife.bind(this, rootView);
+        AndroidSupportInjection.inject(this);
 
-        AppGeneralDataDatabase db = App.getInstance().getAppGeneralDataDatabase();
-        ChapterDao chapterDao = db.chapterDao();
+        init();
 
+        chaptersPresenter.attachView(this);
+        chaptersPresenter.loadData();
+
+        return rootView;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        chaptersPresenter.detachView();
+    }
+
+    @Override
+    public void setData(List<Chapter> data) {
+        adapter.setData(data);
+    }
+
+    private void init() {
+        adapter = new ChapterRecyclerViewAdapter();
         adapter.setmListener(listener);
-
-        chapterDao.getAll()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(chapters -> adapter.setData(chapters));
-
-        RecyclerView mRV = rootView.findViewById(R.id.my_recycler_view_chapters_frag);
         RecyclerView.LayoutManager mRVManager = new LinearLayoutManager(getActivity());
         mRV.setLayoutManager(mRVManager);
         mRV.setAdapter(adapter);
         mRV.setHasFixedSize(true);
-        return rootView;
     }
 
     private RecyclerViewClickListener listener = (view, position) -> {

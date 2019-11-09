@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">GinUp English</string>
 
+    <string name="score">Score</string>
+
     <!-- Tests fragment strings-->
     <string name="random10test">Test: 10 random questions</string>
     <string name="random20test">Test: 20 random questions</string>
@@ -8,7 +10,6 @@
     <string name="chapters">Chapters</string>
     <string name="lessons">Lessons</string>
 
-    <string name="run_tests">Run tests</string>
 
     <string name="result_0">Repeat grammar!</string>
     <string name="result_1">Repeat grammar!</string>
@@ -35,5 +36,6 @@
     <string name="unlock_all_new_questions">unlock all new questions</string>
     <string name="app_price">for 1,49$</string>
     <string name="image_description_buy_full_app">Buy Full App</string>
+
 
 </resources>

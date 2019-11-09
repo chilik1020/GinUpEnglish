@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/tvTest4VarAnswersTopic"
+        android:id="@+id/tvTest4VarTopic"
         android:layout_margin="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -22,12 +22,12 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/my_recycler_view_chapters_tests_frag"/>
+        app:layout_constraintBottom_toTopOf="@id/my_recycler_view_test_4var_frag"/>
 
     <androidx.recyclerview.widget.RecyclerView
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/my_recycler_view_chapters_tests_frag"
+        android:id="@+id/my_recycler_view_test_4var_frag"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:clickable="true"
@@ -38,7 +38,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toTopOf="@id/rlBtnExit"
-        app:layout_constraintTop_toBottomOf="@id/tvTest4VarAnswersTopic" />
+        app:layout_constraintTop_toBottomOf="@id/tvTest4VarTopic" />
 
     <RelativeLayout
         android:id="@+id/rlBtnExit"
@@ -49,7 +49,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/my_recycler_view_chapters_tests_frag">
+        app:layout_constraintTop_toBottomOf="@id/my_recycler_view_test_4var_frag">
 
         <com.dd.ShadowLayout
 

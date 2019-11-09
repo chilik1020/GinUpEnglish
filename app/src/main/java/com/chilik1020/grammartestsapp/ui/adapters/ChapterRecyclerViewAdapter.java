@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.chilik1020.grammartestsapp.R;
-import com.chilik1020.grammartestsapp.data.model.Chapter;
+import com.chilik1020.grammartestsapp.model.entities.Chapter;
 import com.chilik1020.grammartestsapp.ui.listeners.RecyclerViewClickListener;
 
 import java.util.ArrayList;
@@ -46,7 +46,6 @@ public class ChapterRecyclerViewAdapter extends RecyclerView.Adapter<ChapterRecy
 
     @Override
     public void onBindViewHolder(@NonNull ChapterRecyclerViewAdapter.ViewHolder holder, int position) {
-        // no-op
         holder.tvChapter.setText(data.get(position).getChapter());
     }
 

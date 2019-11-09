@@ -15,7 +15,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.dd.ShadowLayout
-            android:id="@+id/test10Q"
+            android:id="@+id/test10QTestsMainFragment"
             style="@style/RvCardShadowStyle">
 
             <LinearLayout
@@ -23,7 +23,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <TextView
-                    android:id="@+id/tvTest10q"
+                    android:id="@+id/tv10QTestsMainFragment"
                     style="@style/CardTextStyle"
                     android:textColor="@color/color_3"
                     tools:text="@string/random10test" />
@@ -31,7 +31,7 @@
         </com.dd.ShadowLayout>
 
         <com.dd.ShadowLayout
-            android:id="@+id/test20Q"
+            android:id="@+id/test20QTestsMainFragment"
             style="@style/RvCardShadowStyle">
 
             <LinearLayout
@@ -39,7 +39,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <TextView
-                    android:id="@+id/tvTest20q"
+                    android:id="@+id/tv20QTestsMainFragment"
                     style="@style/CardTextStyle"
                     android:textColor="@color/color_3"
                     tools:text="@string/random20test" />
@@ -47,7 +47,7 @@
         </com.dd.ShadowLayout>
 
         <com.dd.ShadowLayout
-            android:id="@+id/testChQ"
+            android:id="@+id/testChQTestsMainFragment"
             style="@style/RvCardShadowStyle">
 
             <LinearLayout
@@ -55,7 +55,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <TextView
-                    android:id="@+id/tvTestChQ"
+                    android:id="@+id/tvChQTestsMainFragment"
                     style="@style/CardTextStyle"
                     android:textColor="@color/color_3"
                     tools:text="@string/chapters" />
@@ -63,7 +63,7 @@
         </com.dd.ShadowLayout>
 
         <com.dd.ShadowLayout
-            android:id="@+id/testTopQ"
+            android:id="@+id/testLsQTestsMainFragment"
             style="@style/RvCardShadowStyle">
 
             <LinearLayout
@@ -71,27 +71,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <TextView
-                    android:id="@+id/tvTestTopQ"
+                    android:id="@+id/tvLsQTestsMainFragment"
                     style="@style/CardTextStyle"
                     android:textColor="@color/color_3"
                     tools:text="@string/lessons" />
-            </LinearLayout>
-        </com.dd.ShadowLayout>
-
-        <com.dd.ShadowLayout
-            android:visibility="invisible"
-            android:id="@+id/testDbGetQ"
-            style="@style/RvCardShadowStyle">
-
-            <LinearLayout
-                android:background="@drawable/custom_ripple"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <TextView
-                    android:id="@+id/tvTestDb"
-                    style="@style/CardTextStyle"
-                    android:textColor="@color/color_5"
-                    tools:text="@string/run_tests" />
             </LinearLayout>
         </com.dd.ShadowLayout>
     </LinearLayout>

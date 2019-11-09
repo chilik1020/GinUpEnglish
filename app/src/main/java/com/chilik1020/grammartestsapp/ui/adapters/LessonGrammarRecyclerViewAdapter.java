@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.chilik1020.grammartestsapp.R;
-import com.chilik1020.grammartestsapp.data.model.LessonGrammar;
+import com.chilik1020.grammartestsapp.model.entities.LessonGrammar;
 
 import com.chilik1020.grammartestsapp.ui.listeners.RecyclerViewClickListener;
 
@@ -45,7 +45,6 @@ public class LessonGrammarRecyclerViewAdapter extends RecyclerView.Adapter<Lesso
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-            // no-op
             holder.tvTopic.setText(data.get(position).getTopic());
             }
 

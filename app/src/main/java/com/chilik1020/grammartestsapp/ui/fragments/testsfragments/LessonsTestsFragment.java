@@ -6,11 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.chilik1020.grammartestsapp.R;
-import com.chilik1020.grammartestsapp.data.App;
-import com.chilik1020.grammartestsapp.data.dao.LessonTestDao;
-import com.chilik1020.grammartestsapp.data.dao.ScoreDao;
-import com.chilik1020.grammartestsapp.data.db.AppGeneralDataDatabase;
-import com.chilik1020.grammartestsapp.data.db.AppPersonalDataDatabase;
+import com.chilik1020.grammartestsapp.model.entities.LessonTest;
+import com.chilik1020.grammartestsapp.model.entities.Score;
+import com.chilik1020.grammartestsapp.presenters.LessonsTestContract;
+import com.chilik1020.grammartestsapp.presenters.LessonsTestPresenter;
 import com.chilik1020.grammartestsapp.ui.listeners.RecyclerViewClickListener;
 import com.chilik1020.grammartestsapp.ui.adapters.LessonTestRecyclerViewAdapter;
 
@@ -20,44 +19,60 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
+import java.util.List;
 
-public class LessonsTestsFragment extends Fragment {
+import javax.inject.Inject;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import dagger.android.support.AndroidSupportInjection;
+
+public class LessonsTestsFragment extends Fragment implements LessonsTestContract.View {
+
+    @Inject
+    public LessonsTestPresenter lessonsTestPresenter;
+
+    @BindView(R.id.my_recycler_view_topics_list_frag) RecyclerView mRV;
 
     private LessonTestRecyclerViewAdapter adapter;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         View rootView = inflater.inflate(R.layout.fragment_topics_list, container, false);
+        ButterKnife.bind(this, rootView);
+        AndroidSupportInjection.inject(this);
 
+        init();
+
+        lessonsTestPresenter.attachView(this);
+        lessonsTestPresenter.loadData();
+
+        return rootView;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        lessonsTestPresenter.detachView();
+    }
+
+    @Override
+    public void setData(List<LessonTest> data) {
+        adapter.setData(data);
+    }
+
+    @Override
+    public void setRates(List<Score> rates) {
+        adapter.setRates(rates);
+    }
+
+    private void init() {
         adapter = new LessonTestRecyclerViewAdapter(getActivity());
-
-        AppGeneralDataDatabase db = App.getInstance().getAppGeneralDataDatabase();
-        LessonTestDao lessonTestDao = db.lessonTestsDao();
-
-        AppPersonalDataDatabase dbPersonal = App.getInstance().getAppPersonalDataDatabase();
-        ScoreDao scoreDao = dbPersonal.scoreDao();
-
-        lessonTestDao.getAll()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(lessonTests -> adapter.setData(lessonTests));
-
-        scoreDao.getSingleScoresByTypeResultAndTestId(2, -1)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(rates -> adapter.setRates(rates));
-
-
         adapter.setmListener(listener);
-        RecyclerView mRV = rootView.findViewById(R.id.my_recycler_view_chapters_tests_frag);
         RecyclerView.LayoutManager mRVManager = new LinearLayoutManager(getActivity());
         mRV.setLayoutManager(mRVManager);
         mRV.setAdapter(adapter);
         mRV.setHasFixedSize(true);
-        return rootView;
     }
 
     private RecyclerViewClickListener listener = (view, position) -> {

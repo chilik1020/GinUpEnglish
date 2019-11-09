@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/md_keylines"
         android:layout_marginTop="@dimen/md_keylines"
-        android:text="Score"
+        android:text="@string/score"
         android:gravity="center_vertical|center"
         android:textColor="@color/color_1"
         android:fontFamily="@font/bank_gothic_light_bt"
