@@ -9,7 +9,7 @@
 
     <androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/my_recycler_view_topic_tests_frag"
+        android:id="@+id/my_recycler_view_chapters_tests_frag"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:clickable="true"
@@ -31,7 +31,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/my_recycler_view_topic_tests_frag">
+        app:layout_constraintTop_toBottomOf="@id/my_recycler_view_chapters_tests_frag">
 
         <!--TESTS SMALL BTN-->
         <com.dd.ShadowLayout

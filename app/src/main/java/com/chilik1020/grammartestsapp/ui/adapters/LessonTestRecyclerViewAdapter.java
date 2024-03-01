@@ -1,6 +1,7 @@
 package com.chilik1020.grammartestsapp.ui.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,8 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chilik1020.grammartestsapp.R;
-import com.chilik1020.grammartestsapp.model.entities.LessonTest;
-import com.chilik1020.grammartestsapp.model.entities.Score;
+import com.chilik1020.grammartestsapp.data.model.LessonTest;
+import com.chilik1020.grammartestsapp.data.model.Score;
 import com.chilik1020.grammartestsapp.ui.listeners.RecyclerViewClickListener;
 
 import java.util.ArrayList;
@@ -49,6 +50,10 @@ public class LessonTestRecyclerViewAdapter extends RecyclerView.Adapter<LessonTe
         notifyDataSetChanged();
     }
 
+    public List<Score> getRates() {
+        return rates;
+    }
+
     public void setRates(List<Score> rates) {
         this.rates = rates;
         notifyDataSetChanged();
@@ -56,6 +61,7 @@ public class LessonTestRecyclerViewAdapter extends RecyclerView.Adapter<LessonTe
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        // no-op
         holder.tvTopic.setText(data.get(position).getTopic());
 
         Score score = null;

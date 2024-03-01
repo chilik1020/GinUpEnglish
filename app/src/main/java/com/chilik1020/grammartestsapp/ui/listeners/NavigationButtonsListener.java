@@ -2,9 +2,10 @@ package com.chilik1020.grammartestsapp.ui.listeners;
 
 import android.content.Intent;
 import android.view.View;
+import android.widget.Toast;
 
 import com.chilik1020.grammartestsapp.R;
-import com.chilik1020.grammartestsapp.ui.activities.PurchaseActivity;
+import com.chilik1020.grammartestsapp.ui.PurchaseActivity;
 import com.chilik1020.grammartestsapp.ui.fragments.ScoreFragment;
 import com.chilik1020.grammartestsapp.ui.fragments.grammarfragments.ChaptersFragment;
 import com.chilik1020.grammartestsapp.ui.fragments.testsfragments.TestsMainFragment;
@@ -23,6 +24,9 @@ public class NavigationButtonsListener implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+//            case R.id.navRate:
+//                Toast.makeText(act, "Rate page " , Toast.LENGTH_SHORT).show();
+//                break;
 
             case R.id.navUpgrade:
                 Intent intent = new Intent(act, PurchaseActivity.class);

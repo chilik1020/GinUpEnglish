@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.activities.MainActivity">
+    tools:context=".ui.MainActivity">
 
     <TextView
-        android:id="@+id/tvTopicUnitFragment"
+        android:id="@+id/tvTopic"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
@@ -37,7 +37,7 @@
         app:layout_constraintBottom_toTopOf="@+id/llNavSmallBtns"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTopicUnitFragment">
+        app:layout_constraintTop_toBottomOf="@+id/tvTopic">
 
 
         <WebView

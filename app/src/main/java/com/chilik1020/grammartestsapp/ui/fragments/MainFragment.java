@@ -13,22 +13,19 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 public class MainFragment extends Fragment implements View.OnClickListener {
-
-    @BindView(R.id.mainCardGrammar) View cardGrammar;
-    @BindView(R.id.mainCardTests) View cardTests;
-    @BindView(R.id.mainCardScore) View cardScore;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-        ButterKnife.bind(this, rootView);
 
+        View cardGrammar = rootView.findViewById(R.id.mainCardGrammar);
         cardGrammar.setOnClickListener(this);
+
+        View cardTests = rootView.findViewById(R.id.mainCardTests);
         cardTests.setOnClickListener(this);
+
+        View cardScore = rootView.findViewById(R.id.mainCardScore);
         cardScore.setOnClickListener(this);
 
         return rootView;

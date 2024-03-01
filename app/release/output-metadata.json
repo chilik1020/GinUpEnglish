@@ -1,0 +1,20 @@
+{
+  "version": 3,
+  "artifactType": {
+    "type": "APK",
+    "kind": "Directory"
+  },
+  "applicationId": "com.chilik1020.grammartestsapp",
+  "variantName": "release",
+  "elements": [
+    {
+      "type": "SINGLE",
+      "filters": [],
+      "attributes": [],
+      "versionCode": 9,
+      "versionName": "1.7",
+      "outputFile": "com.chilik1020.grammartestsapp-1.7.apk"
+    }
+  ],
+  "elementType": "File"
+}

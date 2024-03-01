@@ -8,16 +8,13 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.chilik1020.grammartestsapp.R;
-import com.chilik1020.grammartestsapp.model.entities.Question;
+import com.chilik1020.grammartestsapp.data.model.Question;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class Test4VarRecyclerViewAdapter extends RecyclerView.Adapter<Test4VarRecyclerViewAdapter.ViewHolder> {
 
@@ -89,16 +86,21 @@ public class Test4VarRecyclerViewAdapter extends RecyclerView.Adapter<Test4VarRe
 
     class ViewHolder extends RecyclerView.ViewHolder{
 
-        @BindView (R.id.tvQuest) TextView question;
-        @BindView (R.id.rgVariants) RadioGroup radioGroup;
-        @BindView (R.id.rbVar0) RadioButton rbVar0;
-        @BindView (R.id.rbVar1) RadioButton rbVar1;
-        @BindView (R.id.rbVar2) RadioButton rbVar2;
-        @BindView (R.id.rbVar3) RadioButton rbVar3;
+        TextView question;
+        RadioGroup radioGroup;
+        RadioButton rbVar0;
+        RadioButton rbVar1;
+        RadioButton rbVar2;
+        RadioButton rbVar3;
 
         ViewHolder(View item) {
             super(item);
-            ButterKnife.bind(this, item);
+            question = item.findViewById(R.id.tvQuest);
+            radioGroup = item.findViewById(R.id.rgVariants);
+            rbVar0 = item.findViewById(R.id.rbVar0);
+            rbVar1 = item.findViewById(R.id.rbVar1);
+            rbVar2 = item.findViewById(R.id.rbVar2);
+            rbVar3 = item.findViewById(R.id.rbVar3);
             rbVar0.setActivated(false);
         }
     }

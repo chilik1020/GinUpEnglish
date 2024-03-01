@@ -8,26 +8,19 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.TextView;
 
-import com.chilik1020.grammartestsapp.BuildConfig;
 import com.chilik1020.grammartestsapp.R;
-import com.chilik1020.grammartestsapp.model.entities.LessonGrammar;
-import com.chilik1020.grammartestsapp.utils.AppConstant;
+import com.chilik1020.grammartestsapp.data.model.LessonGrammar;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 public class UnitFragment extends Fragment {
-
-    @BindView(R.id.wvGrammar) WebView wvGrammar;
-    @BindView(R.id.tvTopicUnitFragment) TextView tvTopic;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View viewRoot = inflater.inflate(R.layout.fragment_unit, container, false);
-        ButterKnife.bind(this, viewRoot);
+
+        TextView tvTopic = viewRoot.findViewById(R.id.tvTopic);
 
         Bundle bundle = getArguments();
         LessonGrammar unit = (LessonGrammar) bundle.getSerializable("unit");
@@ -35,13 +28,8 @@ public class UnitFragment extends Fragment {
         tvTopic.setText(unit.getTopic());
         String grammarPath = unit.getGrammar();
 
-        initWebView();
+        WebView wvGrammar = viewRoot.findViewById(R.id.wvGrammar);
 
-        wvGrammar.loadUrl(AppConstant.PathToHTML + grammarPath);
-        return viewRoot;
-    }
-
-    private void initWebView(){
         WebSettings settings = wvGrammar.getSettings();
 
         settings.setPluginState(WebSettings.PluginState.ON);
@@ -51,5 +39,8 @@ public class UnitFragment extends Fragment {
         settings.setSupportZoom(true);
 
         wvGrammar.setBackgroundColor(0);
+//        wvGrammar.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+        wvGrammar.loadUrl("file:///android_asset/html/" + grammarPath);
+        return viewRoot;
     }
 }

@@ -10,12 +10,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chilik1020.grammartestsapp.R;
-import com.chilik1020.grammartestsapp.presenters.TestsContract;
-import com.chilik1020.grammartestsapp.presenters.TestsPresenter;
-import com.chilik1020.grammartestsapp.model.entities.Question;
-import com.chilik1020.grammartestsapp.model.entities.Score;
+import com.chilik1020.grammartestsapp.data.App;
+import com.chilik1020.grammartestsapp.data.ScoreSaverUtil;
+import com.chilik1020.grammartestsapp.data.dao.QuestionDao;
+import com.chilik1020.grammartestsapp.data.model.Question;
+import com.chilik1020.grammartestsapp.data.model.Score;
+import com.chilik1020.grammartestsapp.data.db.AppGeneralDataDatabase;
 import com.chilik1020.grammartestsapp.ui.adapters.Test4VarRecyclerViewAdapter;
-import com.chilik1020.grammartestsapp.utils.AppConstant;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,93 +29,134 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import javax.inject.Inject;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import dagger.android.support.AndroidSupportInjection;
+public class Test4VarFragment extends Fragment implements View.OnClickListener {
 
-public class Test4VarFragment extends Fragment implements TestsContract.View, View.OnClickListener {
+    private final Test4VarRecyclerViewAdapter adapter = new Test4VarRecyclerViewAdapter();
 
-    @Inject
-    public TestsPresenter testsPresenter;
+    private TextView tvTopic;
 
-    @BindView(R.id.tvTest4VarTopic) TextView tvTopic;
-    @BindView(R.id.my_recycler_view_test_4var_frag) RecyclerView mRV;
-    @BindView(R.id.btnCheckTest) Button btnCheckTest;
-
-
-    private Test4VarRecyclerViewAdapter adapter;
     private Score score;
     private int result;
 
-    private int chapter;
-    private int lesson;
-    private int test;
-    private int number;
-    private int type;
-
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_test4_var, container, false);
-        ButterKnife.bind(this, rootView);
-        AndroidSupportInjection.inject(this);
 
-        init();
+        tvTopic = rootView.findViewById(R.id.tvTest4VarAnswersTopic);
 
-        testsPresenter.attachView(this);
-        testsPresenter.loadData(type, number, chapter, lesson, test);
+        getQuestionsForAdapter();
 
-        return rootView;
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        testsPresenter.detachView();
-    }
-
-    private void init() {
-        chapter = getArguments().getInt("chapterId");
-        lesson = getArguments().getInt("lessonId");
-        test = getArguments().getInt("testId");
-        number = getArguments().getInt("number");
-        type = getArguments().getInt("type");
-
-        score = new Score(0, type, 0, chapter, lesson, test, -1);
-
-        adapter = new Test4VarRecyclerViewAdapter();
+        RecyclerView mRV = rootView.findViewById(R.id.my_recycler_view_chapters_tests_frag);
         RecyclerView.LayoutManager mRVManager = new LinearLayoutManager(getActivity());
         mRV.setLayoutManager(mRVManager);
         mRV.setAdapter(adapter);
         mRV.setHasFixedSize(true);
+
+        Button btnCheckTest = rootView.findViewById(R.id.btnCheckTest);
         btnCheckTest.setOnClickListener(this);
+        return rootView;
     }
 
-    @Override
-    public void setData(List<Question> data) {
-        adapter.setQuestions(data);
+    private void getQuestionsForAdapter() {
+
+        AppGeneralDataDatabase db = App.getInstance().getAppGeneralDataDatabase();
+        QuestionDao questionDao = db.questionDao();
+
+        int chapter = getArguments().getInt("chapterId");
+        int lesson = getArguments().getInt("lessonId");
+        int test = getArguments().getInt("testId");
+        final int number = getArguments().getInt("number");
+        int type = getArguments().getInt("type");
+
+        score = new Score(0, type, 0, chapter, lesson, test, -1);
+
+        switch (type) {
+            case 0 :
+                if (App.getInstance().isIsAllTestPurchased()) {
+                    questionDao.getAllQuestions()
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(questions -> adapter.setQuestions(getRandomQuestions(number,questions)));
+
+                } else {
+                    questionDao.getFreeQuestions()
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(questions -> adapter.setQuestions(getRandomQuestions(number,questions)));
+                }
+                tvTopic.setText(number + " random questions");
+                break;
+
+            case 1 :
+                if (App.getInstance().isIsAllTestPurchased()) {
+                    questionDao.getAllQuestionsByChapterId(chapter)
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(questions -> adapter.setQuestions(getRandomQuestions(number,questions)));
+                }
+                else {
+                    questionDao.getFreeQuestionByChapterId(chapter)
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(questions -> adapter.setQuestions(getRandomQuestions(number,questions)));
+                }
+
+                db.chapterDao().getChapterTopicById(chapter)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(s -> tvTopic.setText(s + "\n"+ number + " random questions"));
+                break;
+
+            case 2 :
+                questionDao.getQuestionByTestId(test)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(questions -> adapter.setQuestions(getRandomQuestions(number,questions)));
+
+                db.lessonTestsDao().getTopicById(lesson)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(s -> tvTopic.setText(s));
+                break;
+        }
     }
 
-    @Override
-    public void setTopic(String topic) {
-        tvTopic.setText(topic);
+    private List<Question> getRandomQuestions(int number, List<Question> data) {
+//        Log.d("tagz", "getRandomQuestions, questions size = " + data.size());
+        if (data.size() <= 10)
+            return data;
+
+        List<Question> randomData = new ArrayList<>();
+
+        for (int i = 0; i < number; i++) {
+            Question q = data.get((int) (Math.random()*data.size()));
+            randomData.add(q);
+            data.remove(q);
+        }
+        return randomData;
     }
+
 
     @Override
     public void onClick(View view) {
         int correctAnswerNumber = 0;
-        int numberOfQuestions = adapter.getQuestions().size();
         for (Question q: adapter.getQuestions()) {
             if (q.getYourChoose() == q.getRightAnswer())
                 correctAnswerNumber++;
         }
 
-        result = correctAnswerNumber * 100 / numberOfQuestions;
+        result = correctAnswerNumber * 100 / adapter.getQuestions().size();
 
         score.setResult(result);
 
-        testsPresenter.saveResult(score);
+        Observable.just(score)
+                .subscribeOn(Schedulers.io())
+                .subscribe(ScoreSaverUtil::saveResultAndUpdateDBMeanResult);
 
         createAlertDialogResultTest(correctAnswerNumber);
     }
@@ -126,30 +168,30 @@ public class Test4VarFragment extends Fragment implements TestsContract.View, Vi
 
         adb.setCancelable(false);
 
-        TextView tvResultOfTest = dialogResult.findViewById(R.id.tvResultTest);
+        TextView tvResult = dialogResult.findViewById(R.id.tvResultTest);
         String tvResultString = correctAnswerNumber + " / " + adapter.getQuestions().size();
-        tvResultOfTest.setText(tvResultString);
+        tvResult.setText(tvResultString);
 
         ImageView ivTestResult = dialogResult.findViewById(R.id.ivTestResult);
         TextView tvGreat = dialogResult.findViewById(R.id.tvGreat);
 
-        if (result == AppConstant.resultFor0star) {
+        if (result == 0) {
             ivTestResult.setImageDrawable(getContext().getDrawable(R.drawable.stars_0));
             tvGreat.setText(R.string.result_0);
         }
-        else if (result <= AppConstant.resultFor1star) {
+        else if (result <= 30) {
             ivTestResult.setImageDrawable(getContext().getDrawable(R.drawable.stars_1));
             tvGreat.setText(R.string.result_1);
         }
-        else if (result <= AppConstant.resultFor2star) {
+        else if (result <= 50) {
             ivTestResult.setImageDrawable(getContext().getDrawable(R.drawable.stars_2));
             tvGreat.setText(R.string.result_2);
         }
-        else if (result <= AppConstant.resultFor3star) {
+        else if (result <= 70) {
             ivTestResult.setImageDrawable(getContext().getDrawable(R.drawable.stars_3));
             tvGreat.setText(R.string.result_3);
         }
-        else if (result <= AppConstant.resultFor4star) {
+        else if (result <= 99) {
             ivTestResult.setImageDrawable(getContext().getDrawable(R.drawable.stars_4));
             tvGreat.setText(R.string.result_4);
         }
@@ -185,4 +227,7 @@ public class Test4VarFragment extends Fragment implements TestsContract.View, Vi
             Objects.requireNonNull(getActivity()).getSupportFragmentManager().popBackStackImmediate();
         });
     }
+
+
+
 }

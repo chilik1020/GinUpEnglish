@@ -1,6 +1,8 @@
 package com.chilik1020.grammartestsapp.ui.adapters;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,8 +10,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chilik1020.grammartestsapp.R;
-import com.chilik1020.grammartestsapp.model.entities.Score;
-import com.chilik1020.grammartestsapp.model.entities.Test;
+import com.chilik1020.grammartestsapp.data.App;
+import com.chilik1020.grammartestsapp.data.model.Score;
+import com.chilik1020.grammartestsapp.data.model.Test;
+import com.chilik1020.grammartestsapp.ui.MainActivity;
 import com.chilik1020.grammartestsapp.ui.listeners.RecyclerViewClickListener;
 
 import java.util.ArrayList;
@@ -18,16 +22,12 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 public class TestRecyclerViewAdapter extends RecyclerView.Adapter<TestRecyclerViewAdapter.ViewHolder>  {
 
     private RecyclerViewClickListener mListener;
     private Context mContext;
     private List<Test> tests = new ArrayList<>();
     private List<Score> rates = new ArrayList<>();
-    private boolean isAllTestPurchased;
 
     public TestRecyclerViewAdapter(Context mContext) {
         this.mContext = mContext;
@@ -46,12 +46,13 @@ public class TestRecyclerViewAdapter extends RecyclerView.Adapter<TestRecyclerVi
         notifyDataSetChanged();
     }
 
+    public List<Score> getRates() {
+        return rates;
+    }
+
     public void setRates(List<Score> rates) {
         this.rates = rates;
         notifyDataSetChanged();
-    }
-    public void setAllTestPurchased(boolean allTestPurchased) {
-        isAllTestPurchased = allTestPurchased;
     }
 
     @NonNull
@@ -67,7 +68,7 @@ public class TestRecyclerViewAdapter extends RecyclerView.Adapter<TestRecyclerVi
         holder.tvTopic.setText("Test " + (position + 1));
         Test test = tests.get(position);
 
-        if (!isAllTestPurchased) {
+        if (!App.getInstance().isIsAllTestPurchased()) {
             if (test.getPrice() != 0) {
                 holder.itemView.setClickable(false);
                 holder.itemView.setAlpha(0.7f);
@@ -105,16 +106,18 @@ public class TestRecyclerViewAdapter extends RecyclerView.Adapter<TestRecyclerVi
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        @BindView (R.id.tvCardTopic) TextView tvTopic;
-        @BindView(R.id.navUpgrade) ImageView ivBuyTests;
-        @BindView(R.id.startsRateVertical) ImageView ivStarRate;
+        TextView tvTopic;
+        ImageView ivBuyTests;
+        ImageView ivStarRate;
 
         private RecyclerViewClickListener mListener;
         ViewHolder(View item, RecyclerViewClickListener listener) {
             super(item);
-            ButterKnife.bind(this, item);
             mListener = listener;
             item.setOnClickListener(this);
+            tvTopic = item.findViewById(R.id.tvCardTopic);
+            ivBuyTests = item.findViewById(R.id.navUpgrade);
+            ivStarRate = item.findViewById(R.id.startsRateVertical);
         }
 
         @Override

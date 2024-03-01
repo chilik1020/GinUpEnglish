@@ -7,36 +7,33 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.chilik1020.grammartestsapp.R;
-import com.chilik1020.grammartestsapp.model.entities.Chapter;
+import com.chilik1020.grammartestsapp.data.model.Chapter;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 public class ChapterTestsFragment extends Fragment implements View.OnClickListener {
-
-    @BindView(R.id.tvTestChapter10q) TextView test10Q;
-    @BindView(R.id.tvTestChapter20q) TextView test20Q;
-
-    @BindView(R.id.testChapter10Q) View card10q;
-    @BindView(R.id.testChapter20Q) View card20q;
 
     private Chapter chapter;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_chapter_tests, container, false);
-        ButterKnife.bind(this, rootView);
+
         Bundle bundle = getArguments();
         chapter = (Chapter) bundle.getSerializable("chapterId");
         String chapterTopic = chapter.getChapter();
 
+        TextView test10Q = rootView.findViewById(R.id.tvTestChapter10q);
         test10Q.setText(chapterTopic +"\n10 random questions");
+
+        TextView test20Q = rootView.findViewById(R.id.tvTestChapter20q);
         test20Q.setText(chapterTopic +"\n20 random questions");
 
+        View card10q = rootView.findViewById(R.id.testChapter10Q);
         card10q.setOnClickListener(this);
+
+        View card20q = rootView.findViewById(R.id.testChapter20Q);
         card20q.setOnClickListener(this);
 
         return rootView;

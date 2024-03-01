@@ -8,11 +8,19 @@ import android.widget.Button;
 import android.widget.ExpandableListView;
 
 import com.chilik1020.grammartestsapp.R;
-import com.chilik1020.grammartestsapp.model.entities.Score;
-import com.chilik1020.grammartestsapp.presenters.ScoreContract;
-import com.chilik1020.grammartestsapp.presenters.ScorePresenter;
+import com.chilik1020.grammartestsapp.data.App;
+import com.chilik1020.grammartestsapp.data.dao.ChapterDao;
+import com.chilik1020.grammartestsapp.data.dao.LessonTestDao;
+import com.chilik1020.grammartestsapp.data.dao.ScoreDao;
+import com.chilik1020.grammartestsapp.data.db.AppGeneralDataDatabase;
+import com.chilik1020.grammartestsapp.data.db.AppPersonalDataDatabase;
+import com.chilik1020.grammartestsapp.data.model.Chapter;
+import com.chilik1020.grammartestsapp.data.model.LessonTest;
+import com.chilik1020.grammartestsapp.data.model.Score;
 import com.chilik1020.grammartestsapp.ui.adapters.ScoreExpandableListAdapter;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -21,45 +29,37 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
-import javax.inject.Inject;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import dagger.android.support.AndroidSupportInjection;
-
-public class ScoreFragment extends Fragment implements ScoreContract.View, View.OnClickListener {
-
-    @Inject
-    public ScorePresenter scorePresenter;
-
-    @BindView(R.id.elvScores) ExpandableListView elvScores;
-    @BindView(R.id.btnResetScores) Button btnResetScores;
-
+public class ScoreFragment extends Fragment implements View.OnClickListener {
+    private ScoreDao scoreDao;
+    private ChapterDao chapterDao;
+    private LessonTestDao lessonTestDao;
     private ScoreExpandableListAdapter scoreExpandableListAdapter;
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_score, container, false);
-        ButterKnife.bind(this, rootView);
-        AndroidSupportInjection.inject(this);
 
-        init();
+        AppPersonalDataDatabase db = App.getInstance().getAppPersonalDataDatabase();
+        AppGeneralDataDatabase generalDb = App.getInstance().getAppGeneralDataDatabase();
+        scoreDao = db.scoreDao();
+        chapterDao = generalDb.chapterDao();
+        lessonTestDao = generalDb.lessonTestsDao();
 
-        scorePresenter.attachView(this);
-        scorePresenter.loadData();
+        Button btnResetScores = rootView.findViewById(R.id.btnResetScores);
+        btnResetScores.setOnClickListener(this);
+
+        ExpandableListView elvScores = rootView.findViewById(R.id.elvScores);
+
+        scoreExpandableListAdapter = new ScoreExpandableListAdapter(getActivity());
+
+        loadScoresFromDB();
+
+        elvScores.setAdapter(scoreExpandableListAdapter);
 
         return rootView;
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        scorePresenter.detachView();
-    }
-
-    private void init() {
-        scoreExpandableListAdapter = new ScoreExpandableListAdapter(getActivity());
-        elvScores.setAdapter(scoreExpandableListAdapter);
-        btnResetScores.setOnClickListener(this);
     }
 
     @Override
@@ -74,30 +74,62 @@ public class ScoreFragment extends Fragment implements ScoreContract.View, View.
 
         Button btnResetScoreConfirm = dialogResult.findViewById(R.id.btnResetScoreConfirm);
         btnResetScoreConfirm.setOnClickListener(view -> {
-            scorePresenter.resetScore();
+            resetScores();
             ad.cancel();
         });
         Button btnResetScoreCancel = dialogResult.findViewById(R.id.btnResetScoreCancel);
         btnResetScoreCancel.setOnClickListener(view -> ad.cancel());
     }
 
-    @Override
-    public void setParentsData(List<List<Score>> data) {
-        scoreExpandableListAdapter.setmGroupsParent(data);
+    private void resetScores() {
+        scoreDao.deleteAllScores()
+                .subscribeOn(Schedulers.io())
+                .subscribe(() -> loadScoresFromDB());
     }
 
-    @Override
-    public void setChildsData(List<List<Score>> data) {
-        scoreExpandableListAdapter.setmGroupsChild(data);
-    }
+    private void loadScoresFromDB() {
+        List<List<Score>> groupData = new ArrayList<>();
+        List<List<Score>> childData = new ArrayList<>();
+        scoreDao.getSingleScoresByTestTypeAndTypeResult(0,1)
+                .mergeWith(scoreDao.getSingleScoresByTestTypeAndTypeResultAndChapterId(1,1,-1))
+                .mergeWith(scoreDao.getSingleScoresByTestTypeAndTypeResultAndLessonId(2,1, -1))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(item -> {
+                    groupData.add(item);
+                    scoreExpandableListAdapter.setmGroupsParent(groupData);
+                });
 
-    @Override
-    public void setChapters(Map<Integer, String> data) {
-        scoreExpandableListAdapter.setChapters(data);
-    }
+        scoreDao.getSingleScoresByTestTypeAndTypeResult(0,0)
+                .mergeWith(scoreDao.getSingleScoresByTestTypeAndTypeResultWhereChapterIdPositive(1,1))
+                .mergeWith(scoreDao.getSingleScoresByTestTypeAndTypeResultWhereLessonIdPositive(2,1))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(item -> {
+                    childData.add(item);
+                    scoreExpandableListAdapter.setmGroupsChild(childData);
+                });
 
-    @Override
-    public void setLessons(Map<Integer, String> data) {
-        scoreExpandableListAdapter.setLessonTests(data);
+        chapterDao.getAll()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(chapters -> {
+                    Map<Integer, String> chaptersTemp = new HashMap<>();
+                    for (Chapter ch : chapters) {
+                        chaptersTemp.put(ch.get_id(), ch.getChapter());
+                    }
+                    scoreExpandableListAdapter.setChapters(chaptersTemp);
+                });
+
+        lessonTestDao.getAll()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(lessonTests -> {
+                    Map<Integer, String> lessonsTestsTemp = new HashMap<>();
+                    for (LessonTest lt : lessonTests) {
+                        lessonsTestsTemp.put(lt.getId(), lt.getTopic());
+                    }
+                    scoreExpandableListAdapter.setLessonTests(lessonsTestsTemp);
+                });
     }
 }

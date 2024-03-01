@@ -10,10 +10,8 @@ import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.chilik1020.grammartestsapp.BuildConfig;
 import com.chilik1020.grammartestsapp.R;
-import com.chilik1020.grammartestsapp.model.entities.Score;
-import com.chilik1020.grammartestsapp.utils.AppConstant;
+import com.chilik1020.grammartestsapp.data.model.Score;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -62,6 +60,10 @@ public class ScoreExpandableListAdapter extends BaseExpandableListAdapter {
     public void setChapters(Map<Integer, String> chapters) {
         this.chapters = chapters;
         notifyDataSetChanged();
+    }
+
+    public Map<Integer, String> getLessonTests() {
+        return lessonTests;
     }
 
     public void setLessonTests(Map<Integer, String> lessonTests) {
@@ -115,6 +117,7 @@ public class ScoreExpandableListAdapter extends BaseExpandableListAdapter {
         });
 
         TextView textGroupTopic = convertView.findViewById(R.id.tvGroupScoreCardTopic);
+//        TextView textGroupAttempts = convertView.findViewById(R.id.tvGroupScoreCardAttempts);
         TextView textGroupResult = convertView.findViewById(R.id.tvGroupScoreCardAverage);
         ImageView ivGroupImage = convertView.findViewById(R.id.ivGroupScoreCardStars);
 
@@ -140,15 +143,15 @@ public class ScoreExpandableListAdapter extends BaseExpandableListAdapter {
 
             textGroupResult.setText(result + " %");
 
-            if (result == AppConstant.resultFor0star)
+            if (result == 0)
                 ivGroupImage.setImageDrawable(mContext.getDrawable(R.drawable.stars_0));
-            else if (result <= AppConstant.resultFor1star)
+            else if (result <= 30)
                 ivGroupImage.setImageDrawable(mContext.getDrawable(R.drawable.stars_1));
-            else if (result <= AppConstant.resultFor2star)
+            else if (result <= 50)
                 ivGroupImage.setImageDrawable(mContext.getDrawable(R.drawable.stars_2));
-            else if (result <= AppConstant.resultFor3star)
+            else if (result <= 70)
                 ivGroupImage.setImageDrawable(mContext.getDrawable(R.drawable.stars_3));
-            else if (result <= AppConstant.resultFor4star)
+            else if (result <= 99)
                 ivGroupImage.setImageDrawable(mContext.getDrawable(R.drawable.stars_4));
             else
                 ivGroupImage.setImageDrawable(mContext.getDrawable(R.drawable.stars_5));
@@ -165,6 +168,7 @@ public class ScoreExpandableListAdapter extends BaseExpandableListAdapter {
         }
 
         TextView tvChildTopic =  convertView.findViewById(R.id.tvChildScoreCardTopic);
+//        TextView tvChildAttempts = convertView.findViewById(R.id.tvChildScoreCardAttempts);
         TextView tvChildResult = convertView.findViewById(R.id.tvChildScoreCardAverage);
         ImageView ivChildImage = convertView.findViewById(R.id.ivChildScoreCardStars);
 
@@ -191,15 +195,15 @@ public class ScoreExpandableListAdapter extends BaseExpandableListAdapter {
 
         tvChildResult.setText(result + " %");
 
-        if (result == AppConstant.resultFor0star)
+        if (result == 0)
             ivChildImage.setImageDrawable(mContext.getDrawable(R.drawable.stars_0));
-        else if (result <= AppConstant.resultFor1star)
+        else if (result <= 30)
             ivChildImage.setImageDrawable(mContext.getDrawable(R.drawable.stars_1));
-        else if (result <= AppConstant.resultFor2star)
+        else if (result <= 50)
             ivChildImage.setImageDrawable(mContext.getDrawable(R.drawable.stars_2));
-        else if (result <= AppConstant.resultFor3star)
+        else if (result <= 70)
             ivChildImage.setImageDrawable(mContext.getDrawable(R.drawable.stars_3));
-        else if (result <= AppConstant.resultFor4star)
+        else if (result <= 99)
             ivChildImage.setImageDrawable(mContext.getDrawable(R.drawable.stars_4));
         else
             ivChildImage.setImageDrawable(mContext.getDrawable(R.drawable.stars_5));
