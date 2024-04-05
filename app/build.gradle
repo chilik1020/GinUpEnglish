@@ -1,13 +1,16 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 33
+
+    namespace 'com.chilik1020.grammartestsapp'
+
     defaultConfig {
         applicationId "com.chilik1020.grammartestsapp"
         minSdkVersion 21
-        targetSdkVersion 33
-        versionCode 9
-        versionName "1.7"
+        compileSdk 34
+        targetSdk 34
+        versionCode 10
+        versionName "1.8"
   //      testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         vectorDrawables.useSupportLibrary = true
@@ -22,7 +25,7 @@ android {
         release {
             // Enables code shrinking, obfuscation, and optimization for only
             // your project's release build type.
-            minifyEnabled false
+            minifyEnabled true
 
             // Enables resource shrinking, which is performed by the
             // Android Gradle plugin.
@@ -60,7 +63,8 @@ android {
         sourceCompatibility = '1.8'
         targetCompatibility = '1.8'
     }
-    buildToolsVersion = '33.0.0'
+    buildToolsVersion = '34.0.0'
+    compileSdk 34
 }
 
 dependencies {
@@ -80,7 +84,7 @@ dependencies {
     implementation 'com.github.dmytrodanylyk.shadow-layout:library:1.0.3'
 
     // ROOM
-    def room_version = '2.2.0-rc01'
+    def room_version = '2.6.1'
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
 
@@ -88,7 +92,7 @@ dependencies {
     // RXJAVA
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
     implementation 'io.reactivex.rxjava2:rxjava:2.2.9'
-    implementation group: 'androidx.room', name: 'room-rxjava2', version: '2.2.0-rc01'
+    implementation group: 'androidx.room', name: 'room-rxjava2', version: '2.6.1'
 
 
     // Android In-App Billing v3 Library
