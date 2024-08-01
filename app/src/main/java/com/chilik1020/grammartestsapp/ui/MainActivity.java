@@ -5,15 +5,19 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.appsflyer.AFInAppEventType;
+import com.appsflyer.attribution.AppsFlyerRequestListener;
 import com.chilik1020.grammartestsapp.R;
 import com.chilik1020.grammartestsapp.data.App;
 import com.chilik1020.grammartestsapp.data.model.UserStat;
 import com.chilik1020.grammartestsapp.ui.fragments.MainFragment;
 import com.chilik1020.grammartestsapp.ui.listeners.NavigationButtonsListener;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
@@ -24,7 +28,7 @@ import androidx.fragment.app.Fragment;
 
 import io.reactivex.schedulers.Schedulers;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,11 +62,10 @@ public class MainActivity extends AppCompatActivity{
     @Override
     public void onBackPressed() {
         List<Fragment> fragments = getSupportFragmentManager().getFragments();
-        if (fragments.get(0).toString().startsWith("Test4VarAnswersFragment")) {}
-        else if (fragments.get(0).toString().startsWith("Test4VarFragment")) {
+        if (fragments.get(0).toString().startsWith("Test4VarAnswersFragment")) {
+        } else if (fragments.get(0).toString().startsWith("Test4VarFragment")) {
             createAlertDialogExitFromTest();
-        }
-        else {
+        } else {
             if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
                 getSupportFragmentManager().popBackStack();
             } else {
@@ -113,7 +116,7 @@ public class MainActivity extends AppCompatActivity{
         btnAlreadyRate.setOnClickListener(view -> {
             ad.cancel();
             App.getInstance().getAppPersonalDataDatabase().UserStatDao()
-                    .update(new UserStat(0, numberOfStarts+1, 1))
+                    .update(new UserStat(0, numberOfStarts + 1, 1))
                     .subscribeOn(Schedulers.computation())
                     .subscribe();
         });
@@ -130,30 +133,44 @@ public class MainActivity extends AppCompatActivity{
         });
     }
 
-    public void rateApp()
-    {
-        try
-        {
+    public void rateApp() {
+        try {
+            sendRateEvent();
             Intent rateIntent = rateIntentForUrl("market://details");
             startActivity(rateIntent);
-        }
-        catch (ActivityNotFoundException e)
-        {
+
+        } catch (ActivityNotFoundException e) {
             Intent rateIntent = rateIntentForUrl("https://play.google.com/store/apps/details");
             startActivity(rateIntent);
         }
     }
 
-    private Intent rateIntentForUrl(String url)
-    {
+    private void sendRateEvent() {
+        Log.d("AppsFlyer My___)", "TRY TO SEND RATE EVENT...");
+        App.getInstance().getAppsflyer().logEvent(getApplicationContext(),
+                AFInAppEventType.RATE, new HashMap<>(),
+                new AppsFlyerRequestListener() {
+                    @Override
+                    public void onSuccess() {
+                        // YOUR CODE UPON SUCCESS
+                        Log.d("AppsFlyer My___)", "APPS FLYER EVENT [AFInAppEventType.RATE] : Success");
+                    }
+
+                    @Override
+                    public void onError(int i, String s) {
+                        // YOUR CODE FOR ERROR HANDLING
+                        Log.d("AppsFlyer My___)", "APPS FLYER EVENT [AFInAppEventType.RATE] : Error : " + i + ", " + "s");
+                    }
+                }
+        );
+    }
+
+    private Intent rateIntentForUrl(String url) {
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(String.format("%s?id=%s", url, getPackageName())));
         int flags = Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_MULTIPLE_TASK;
-        if (Build.VERSION.SDK_INT >= 21)
-        {
+        if (Build.VERSION.SDK_INT >= 21) {
             flags |= Intent.FLAG_ACTIVITY_NEW_DOCUMENT;
-        }
-        else
-        {
+        } else {
             //noinspection deprecation
             flags |= Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET;
         }

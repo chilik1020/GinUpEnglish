@@ -4,6 +4,11 @@ import android.app.Application;
 import android.content.Context;
 import android.util.Log;
 
+import com.appsflyer.AFInAppEventType; // Predefined event names
+import com.appsflyer.AFInAppEventParameterName; // Predefined parameter names
+
+import com.appsflyer.AppsFlyerLib;
+import com.appsflyer.attribution.AppsFlyerRequestListener;
 import com.chilik1020.grammartestsapp.data.dao.PurchaseDao;
 import com.chilik1020.grammartestsapp.data.db.AppGeneralDataDatabase;
 import com.chilik1020.grammartestsapp.data.db.AppPersonalDataDatabase;
@@ -14,7 +19,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.HashMap;
+import java.util.Map;
 
+import androidx.annotation.NonNull;
 import androidx.room.Room;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -33,6 +41,8 @@ public class App extends Application {
 
     private final String ENG_A2_B2_ALL_TESTS = Purchases.ENG_A2_B2_ALL_TESTS.getName();
 
+    private final String ABDK = "HNcKARnJK3bQ5Ytvng4nPc";
+
     private static App instance;
     private AppGeneralDataDatabase appGeneralDataDatabase;
     private AppPersonalDataDatabase appPersonalDataDatabase;
@@ -41,12 +51,15 @@ public class App extends Application {
     private boolean isAllTestPurchased = false;
     private int numberOfAppStarts = 0;
     private boolean isAppRatedByUser = false;
+    private String LOG_TAG = "___)";
 
     @Override
     public void onCreate() {
         super.onCreate();
         appContext = getApplicationContext();
         instance = this;
+
+        appsFlyer();
 
         createDBs();
 
@@ -55,6 +68,46 @@ public class App extends Application {
         increaseNumberOfAppStarts();
 
         StringUtil.getPublicStr();
+    }
+
+    private void appsFlyer() {
+        getAppsflyer().setDebugLog(true);
+        getAppsflyer().setMinTimeBetweenSessions(5);
+        getAppsflyer().init(ABDK, null, this);
+        getAppsflyer().start(this, ABDK, new AppsFlyerRequestListener() {
+            @Override
+            public void onSuccess() {
+                Log.d(LOG_TAG, "Launch sent successfully, got 200 response code from server");
+            }
+
+            @Override
+            public void onError(int i, @NonNull String s) {
+                Log.d(LOG_TAG, "Launch failed to be sent:\n" +
+                        "Error code: " + i + "\n"
+                        + "Error description: " + s);
+            }
+        });
+
+//        Map<String, Object> eventValues = new HashMap<String, Object>();
+//        eventValues.put(AFInAppEventParameterName.af_rate, <<PLACE_HOLDRER_FOR_PARAM_VALUE>>);
+//        eventValues.put(AFInAppEventParameterName.complete_exercise, <<PLACE_HOLDRER_FOR_PARAM_VALUE>>);
+//        eventValues.put(AFInAppEventParameterName.course_completed, <<PLACE_HOLDRER_FOR_PARAM_VALUE>>);
+//        eventValues.put(AFInAppEventParameterName.rates_view, <<PLACE_HOLDRER_FOR_PARAM_VALUE>>);
+//        eventValues.put(AFInAppEventParameterName.rates_clear, <<PLACE_HOLDRER_FOR_PARAM_VALUE>>);
+//
+//        getAppsflyer().logEvent(getApplicationContext(),
+//                AFInAppEventType.RATE, eventValues,
+//                new AppsFlyerRequestListener() {
+//                    @Override
+//                    public void onSuccess() {
+//                        // YOUR CODE UPON SUCCESS
+//                    }
+//                    @Override
+//                    public void onError(int i, String s) {
+//                        // YOUR CODE FOR ERROR HANDLING
+//                    }
+//                }
+//        );
     }
 
     private void createDBs() {
@@ -138,6 +191,9 @@ public class App extends Application {
         return appPersonalDataDatabase;
     }
 
+    public AppsFlyerLib getAppsflyer() {
+        return AppsFlyerLib.getInstance();
+    }
 
     public boolean isIsAllTestPurchased() {
         return isAllTestPurchased;
