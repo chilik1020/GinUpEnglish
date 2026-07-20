@@ -7,8 +7,8 @@ android {
     defaultConfig {
         applicationId "com.chilik1020.grammartestsapp"
         minSdkVersion 21
-        compileSdk 34
-        targetSdk 34
+        compileSdk 36
+        targetSdk 36
         versionCode 10
         versionName "1.8"
   //      testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -63,8 +63,8 @@ android {
         sourceCompatibility = '1.8'
         targetCompatibility = '1.8'
     }
-    buildToolsVersion = '34.0.0'
-    compileSdk 34
+    buildToolsVersion = '36.0.0'
+    compileSdk 36
 }
 
 dependencies {
